@@ -34,8 +34,8 @@ RUN chown -R www-data:www-data /var/www/humhub
 RUN usermod -u 1000 www-data
 RUN usermod -G staff www-data
 
-RUN echo "* * * * * su -c '/usr/bin/php /var/www/humhub/protected/yii queue/run >/dev/null 2>&1' - www-data" > /etc/cron.d/humhub
-RUN echo "* * * * * su -c '/usr/bin/php /var/www/humhub/protected/yii cron/run >/dev/null 2>&1' - www-data" >> /etc/cron.d/humhub
+RUN echo "* * * * * /usr/bin/php /var/www/humhub/protected/yii queue/run >/dev/null 2>&1" > /etc/cron.d/humhub
+RUN echo "* * * * * /usr/bin/php /var/www/humhub/protected/yii cron/run >/dev/null 2>&1" >> /etc/cron.d/humhub
 
 ## Setting up nginx
 COPY ./nginx.conf /etc/nginx/sites-enabled/default
