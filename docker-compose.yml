@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+
+    humhub:
+        build: .
+        ports:
+            - 8080:80
+        volumes:
+            - "./protected/config:/var/www/humhub/protected/config"
+            - "./protected/modules:/var/www/humhub/protected/modules"
+            - "./uploads:/var/www/humhub/uploads"
+
+    # During HumHub setup, specify "database" as database host
+    database:
+        image: mariadb:10.5.5
+        volumes:
+            - "/srv/docker/humhub/database:/var/lib/mysql"
+        environment: 
+            MYSQL_ROOT_PASSWORD: humhub_prod_db_pwd
+            MYSQL_DATABASE: humhub_prod_db
+            MYSQL_USER: humhub_prod
+            MYSQL_PASSWORD: humhub_prod_pwd
